@@ -1,0 +1,36 @@
+<ion-grid>
+    <ion-row>
+        <ion-col>
+            <h1>New Client</h1>
+        </ion-col>
+    </ion-row>
+    <form [formGroup]="clientForm">
+        <ion-row>
+            <ion-col>
+                <ion-label>Name:</ion-label>
+                <ion-input formControlName="name" placeholder="Name"></ion-input>
+            </ion-col>
+            <ion-col>
+                <ion-label>Apellido:</ion-label>
+                <ion-input formControlName="lastname" placeholder="apellido"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-label>Telefono:</ion-label>
+                <ion-input formControlName="phone" placeholder="Telefono"></ion-input>
+            </ion-col>
+        </ion-row>
+
+    </form>
+    <ion-row>
+        <ion-col>
+            <ion-button expand="full" [disabled]="!clientForm.valid" (click)="save()" color="primary">Guardar</ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-button expand="full" [routerLink]="['/main/client/list']" color="primary">Volver</ion-button>
+        </ion-col>
+    </ion-row>
+</ion-grid>

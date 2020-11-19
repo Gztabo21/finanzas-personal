@@ -1,0 +1,32 @@
+<ion-grid>
+    <ion-row>
+        <ion-col>
+            <h1>New Payment</h1>
+        </ion-col>
+    </ion-row>
+
+    <form [formGroup]="paymentForm">
+        <ion-row>
+            <ion-col>
+                <ion-label>Client:</ion-label>
+                <ion-input formControlName="client" placeholder="Client"></ion-input>
+            </ion-col>
+            <ion-col>
+                <ion-label>Amount:</ion-label>
+                <ion-input formControlName="amount" placeholder="Amount"></ion-input>
+            </ion-col>
+        </ion-row>
+    </form>
+
+    <ion-row>
+        <ion-col>
+            <ion-button expand="full" [disabled]="!paymentForm.valid" (click)="save()">Guardar</ion-button>
+        </ion-col>
+
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-button expand="full" [routerLink]="['/main/payment/list']">Volver</ion-button>
+        </ion-col>
+    </ion-row>
+</ion-grid>
