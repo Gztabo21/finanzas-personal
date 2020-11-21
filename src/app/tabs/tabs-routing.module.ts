@@ -4,8 +4,13 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'main',
-    component: TabsPage,
+    path: '',
+    redirectTo: 'auth',
+    pathMatch: 'full',
+},  
+  {
+    path: '',
+ /*    component: TabsPage, */
     children: [
       {
         path: 'product',
@@ -25,17 +30,21 @@ const routes: Routes = [
         loadChildren: () => import('../components/payment/payment.module').then(m => m.PaymentModule)
       },
       {
+        path: 'auth',
+        loadChildren: () => import('../components/auth/auth.module').then(m => m.AuthModule)
+      },
+      /* {
         path: '',
         redirectTo: '/main/product',
         pathMatch: 'full'
-      }
+      } */
     ]
   },
-  {
+ /*  {
     path: '',
     redirectTo: '/main/product',
     pathMatch: 'full'
-  }
+  } */
 ];
 
 @NgModule({
