@@ -9,8 +9,8 @@ const routes: Routes = [
     pathMatch: 'full',
 },  
   {
-    path: '',
- /*    component: TabsPage, */
+    path: 'main',
+    component: TabsPage,
     children: [
       {
         path: 'product',
@@ -28,17 +28,12 @@ const routes: Routes = [
       {
         path: 'payment',
         loadChildren: () => import('../components/payment/payment.module').then(m => m.PaymentModule)
-      },
-      {
-        path: 'auth',
-        loadChildren: () => import('../components/auth/auth.module').then(m => m.AuthModule)
-      },
-      /* {
-        path: '',
-        redirectTo: '/main/product',
-        pathMatch: 'full'
-      } */
+      }
     ]
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('../components/auth/auth.module').then(m => m.AuthModule)
   },
  /*  {
     path: '',

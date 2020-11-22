@@ -22,9 +22,13 @@
     </ion-col>
   </ion-row>
 </form>
+<ion-row *ngIf="errorAuth" >
+  <ion-col> <label class="message-error" >{{message}}</label></ion-col>
+</ion-row>
+
   <ion-row>
     <ion-col>
-      <ion-button expand="block"  >Iniciar Session</ion-button>
+      <ion-button expand="block" (click)="signIn()" [disabled]="!signinForm.valid" >Iniciar Session</ion-button>
     </ion-col>
   </ion-row>
   <ion-row>

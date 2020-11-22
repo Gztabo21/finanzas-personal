@@ -1,4 +1,4 @@
-import { product } from './product';
+import { Product } from './product';
 export class sale {
 id?:number;
 number:number;
@@ -7,7 +7,7 @@ saleInvoice:Date;
 amountTotal:Number;
 saleItem:[{
     id:Number;
-    product:product;
+    product:Product;
     cantidad:Number;
     amount:Number;
     amounTotal:number;

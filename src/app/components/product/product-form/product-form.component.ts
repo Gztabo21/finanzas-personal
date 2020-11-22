@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
-import { product } from 'src/app/core/module/product'
+import { Product } from 'src/app/core/module/product';
+import { ProductService } from 'src/app/core/service/product.service';
+import { Router,ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
@@ -8,9 +10,12 @@ import { product } from 'src/app/core/module/product'
 })
 export class ProductFormComponent implements OnInit {
   public productForm:FormGroup;
-  product: product;
+  product: Product;
   constructor(    
-    private formBuilder : FormBuilder
+    private formBuilder : FormBuilder,
+    private  productService: ProductService,
+    public router: Router,
+    public routeActivate:ActivatedRoute
     ) { }
 
   ngOnInit() {
@@ -25,7 +30,12 @@ export class ProductFormComponent implements OnInit {
     })
   }
 save(){
-  console.log(this.productForm.getRawValue())
+  let data = this.productForm.getRawValue()
+  this.productService.create(data).then(data=>{
+    console.log('Almcenado')
+    this.router.navigate(['../main/product/list'])
+
+  }).catch(error=>{console.log(error)})
 }
   
 

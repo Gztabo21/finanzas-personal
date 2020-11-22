@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { ProductRoutingModule } from './product-routing.module';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductListComponent } from './product-list/product-list.component';
+// services
+import { ProductService } from 'src/app/core/service/product.service'
 
 @NgModule({
   imports: [ 
@@ -16,6 +18,9 @@ import { ProductListComponent } from './product-list/product-list.component';
   declarations: [
     ProductFormComponent,
     ProductListComponent],
-  exports: [ProductListComponent]
+  exports: [ProductListComponent],
+  providers:[
+    ProductService
+  ]
 })
 export class ProductModule {}

@@ -5,30 +5,30 @@
         </ion-title>
     </ion-toolbar>
 </ion-header>
-
+<ion-content>
 <ion-grid>
     <ion-row>
         <ion-col>
             <ion-button color="primary" [routerLink]="['/main/product/new']">
                 <ion-icon name="add-outline"></ion-icon> NUEVO PRODUCT</ion-button>
         </ion-col>
-        <ion-col>
+        <!-- <ion-col>
             <ion-button color="primary" [routerLink]="['/main/product/edit/1']">NUEVO PRODUCT</ion-button>
-        </ion-col>
+        </ion-col> -->
     </ion-row>
     <ion-row>
         <ion-col>
             <ion-list>
-                <ion-item>
-                    <ion-label>termino</ion-label>
+                <ion-item *ngFor="let product of products" >
+                    <ion-label>{{product.name}}</ion-label>
                     <!-- <ion-item-option side="start">
                         <img src="" alt="imagen" />
                     </ion-item-option> -->
                     <!-- <ion-input></ion-input> -->
                 </ion-item>
-                <ion-list-header>hola</ion-list-header>
 
             </ion-list>
         </ion-col>
     </ion-row>
 </ion-grid>
+</ion-content>
