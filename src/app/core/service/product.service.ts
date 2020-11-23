@@ -12,6 +12,7 @@ export class ProductService {
   ) { }
   create(product:Product){
    return this.angularFireDataBase.database.ref('products/').push().set({
+        id: product.id,
         name: product.name,
         price: product.price,
         quantity: product.quantity

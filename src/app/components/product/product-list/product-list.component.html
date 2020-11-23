@@ -21,6 +21,8 @@
             <ion-list>
                 <ion-item *ngFor="let product of products" >
                     <ion-label>{{product.name}}</ion-label>
+                    <ion-button (click)="ActionSheet(product.id)" color="ligth"  style="color:#000;" ><ion-icon name="ellipsis-vertical-outline"></ion-icon></ion-button>
+
                     <!-- <ion-item-option side="start">
                         <img src="" alt="imagen" />
                     </ion-item-option> -->

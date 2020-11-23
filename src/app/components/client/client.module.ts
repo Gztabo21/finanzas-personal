@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientFormComponent } from './client-form/client-form.component';
 import { ClientListComponent } from './client-list/client-list.component';
+import { LayoutModule } from 'src/app/components/layout/layout.module'
 
 @NgModule({
   imports: [ 
@@ -12,6 +13,7 @@ import { ClientListComponent } from './client-list/client-list.component';
     FormsModule,
     ReactiveFormsModule,
     ClientRoutingModule, 
+    LayoutModule,
     IonicModule],
   declarations: [
     ClientFormComponent,

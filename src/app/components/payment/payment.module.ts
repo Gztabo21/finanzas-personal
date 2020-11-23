@@ -5,13 +5,15 @@ import { IonicModule } from '@ionic/angular';
 import { PaymentRoutingModule } from './payment-routing.module';
 import { PaymentFormComponent } from './payment-form/payment-form.component';
 import { PaymentListComponent } from './payment-list/payment-list.component';
+import { LayoutModule } from 'src/app/components/layout/layout.module'
 
 @NgModule({
   imports: [ 
     CommonModule, 
     FormsModule,
     ReactiveFormsModule,
-    PaymentRoutingModule, 
+    PaymentRoutingModule,
+    LayoutModule, 
     IonicModule],
   declarations: [
     PaymentFormComponent,
