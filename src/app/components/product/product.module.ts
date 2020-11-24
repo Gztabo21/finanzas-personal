@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import {SharedModule} from 'src/app/core/shared/shared.module';
 import { ProductRoutingModule } from './product-routing.module';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductListComponent } from './product-list/product-list.component';
@@ -13,7 +14,8 @@ import { ProductService } from 'src/app/core/service/product.service'
     CommonModule, 
     FormsModule,
     ReactiveFormsModule,
-    ProductRoutingModule, 
+    ProductRoutingModule,
+    SharedModule, 
     IonicModule],
   declarations: [
     ProductFormComponent,

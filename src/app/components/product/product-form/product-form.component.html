@@ -2,6 +2,7 @@
     <ion-row>
         <ion-col>
             <h1>New Product</h1>
+            <h1 *ngIf="editing" >{{product?.name}}</h1>
         </ion-col>
     </ion-row>
     <form [formGroup]="productForm">

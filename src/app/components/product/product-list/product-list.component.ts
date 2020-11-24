@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { snapshotChanges } from '@angular/fire/database';
 import { Product } from 'src/app/core/module/product';
 import { ProductService }from 'src/app/core/service/product.service';
 import { Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-product-list',
@@ -24,12 +24,16 @@ export class ProductListComponent implements OnInit {
     this.getproducts();
   }
 
-  async getproducts(){
-    await this.productService.getAll().then((snapshot) =>{ 
+  getproducts(){
+    this.productService.getAll().subscribe((data:Product[])=>{
+      this.products = data
+     //this.products.push({id:data.,name:child.val().name,price:child.val().price,quantity:child.val().price})
+    })
+   /*  .then((snapshot) =>{ 
       snapshot.forEach((child) => {    
         this.products.push({id:child.key,name:child.val().name,price:child.val().price,quantity:child.val().price})
       });
-    })  
+    })   */
     
   }
  
@@ -98,8 +102,10 @@ export class ProductListComponent implements OnInit {
   }
 
   // eliminar items
-  deleteProduct(id){
-    console.log(id)
+  deleteProduct(key$){
+  this.productService.detele(key$).subscribe(data=>{
+    this.getproducts();
+  })
   }
   
 

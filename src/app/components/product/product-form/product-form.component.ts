@@ -19,23 +19,31 @@ export class ProductFormComponent implements OnInit {
     public router: Router,
     public routeActivate:ActivatedRoute
     ) {
-        this.routeActivate.queryParams.subscribe(r=>{this.id = r['id']});
-      debugger
+        this.routeActivate.params.subscribe(r=>{this.id = r['id']
+      });
      }
 
   ngOnInit() {
-    this.productForm = this.createForm();
-    console.log(this.id)
+    this.beEditing();
   }
 
-  async beEditing() {
-    
-    this.productForm = this.createForm();
+  beEditing() {
+  
+    if(this.id){
+      this.editing = true;
+      this.productService.get(this.id).subscribe((data:Product)=>{
+       this.product = data;
+       this.productForm = this.createForm();
+      })
+      this.productForm = this.createForm();
+    }else{
+       this.productForm = this.createForm();
+    }  
+   
   }
 
   createForm():FormGroup{
     return this.formBuilder.group({
-      id:[this.product?.id || ''],
       name:[this.product?.name,Validators.required],
       price:[this.product?.price || 0.00 ,Validators.required],
       quantity:[ this.product?.quantity || 0 ,Validators.required]
@@ -43,12 +51,17 @@ export class ProductFormComponent implements OnInit {
   }
 save(){
   let data = this.productForm.getRawValue()
-  data.id = 1
-  this.productService.create(data).then(data=>{
-    console.log('Almacenado')
+  if(this.editing){
+    this.productService.update(data,this.id).subscribe(data=>{
+      this.router.navigate(['../main/product/list'])
+       console.log(data)
+      })
+  }else{
+  this.productService.create(data).subscribe(data=>{
     this.router.navigate(['../main/product/list'])
-
-  }).catch(error=>{console.log(error)})
+     console.log(data)
+    })
+  }
 }
   
 
