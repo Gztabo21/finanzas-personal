@@ -26,7 +26,8 @@ const config = {
   messagingSenderId: environment.messagingSenderId
 };
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent
+    ],
   entryComponents: [],
   imports: [BrowserModule,
      IonicModule.forRoot(),
