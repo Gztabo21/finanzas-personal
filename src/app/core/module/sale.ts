@@ -1,5 +1,5 @@
 import { Product } from './product';
-export class sale {
+export class Sale {
 id?:number;
 number:number;
 client:Number;
