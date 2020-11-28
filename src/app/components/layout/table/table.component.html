@@ -1,0 +1,13 @@
+<ion-grid>
+  <ion-row>
+      <ion-col>
+          <ion-list>
+              <ion-item *ngFor="let k of elements | keys" >
+                  <ion-label>{{elements[k].name}}</ion-label>
+                  <ion-button (click)="ActionSheet(k)" color="ligth"  style="color:#000;" ><ion-icon name="ellipsis-vertical-outline"></ion-icon></ion-button>
+              </ion-item>
+
+          </ion-list>
+      </ion-col>
+  </ion-row>
+</ion-grid>

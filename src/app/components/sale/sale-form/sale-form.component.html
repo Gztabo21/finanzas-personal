@@ -7,8 +7,12 @@
     <form>
         <ion-row>
             <ion-col>
-                <ion-label>Client:</ion-label>
-                <ion-input placeholder="Name"></ion-input>
+                <ion-item>
+                    <ion-label>Client</ion-label>
+                    <ion-select  placeholder="Select One Client">
+                      <ion-select- *ngFor="let client for Clients" [value]="client">{{client.name}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
             </ion-col>
             <ion-col>
                 <ion-label>Apellido:</ion-label>

@@ -9,7 +9,7 @@ import { Sale } from '../module/sale';
   providedIn: 'root'
 })
 
-export class saleService {
+export class SaleService {
    apiUrl:string = environment.databaseURL + '/sales'
    headers = new HttpHeaders( {
     'Content-Type':'application/json'
