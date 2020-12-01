@@ -1,35 +1,30 @@
+<app-header Name="New Sale" ></app-header>
+<ion-content>
 <ion-grid>
-    <ion-row>
-        <ion-col>
-            <h1>New Sale</h1>
-        </ion-col>
-    </ion-row>
     <form>
         <ion-row>
             <ion-col>
+              <!--   <ion-item *ngFor="let k of products | keys" >
+                    <ion-label>{{products[k].name}}</ion-label>
+                    <ion-button (click)="ActionSheet(k)" color="ligth"  style="color:#000;" >
+                        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+                    </ion-button>
+                </ion-item> -->
                 <ion-item>
-                    <ion-label>Client</ion-label>
-                    <ion-select  placeholder="Select One Client">
-                      <ion-select- *ngFor="let client for Clients" [value]="client">{{client.name}}</ion-select-option>
+                    <ion-select   placeholder="Select One Client">
+                        <ion-select-option *ngFor="let k of clients | keys" [value]="k" >{{clients[k].name}}</ion-select-option>
                     </ion-select>
                 </ion-item>
+
             </ion-col>
-            <ion-col>
-                <ion-label>Apellido:</ion-label>
-                <ion-input placeholder="apellido"></ion-input>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <ion-label>Telefono:</ion-label>
-                <ion-input placeholder="Telefono"></ion-input>
-            </ion-col>
+       
         </ion-row>
 
     </form>
     <ion-row>
-        <ion-col>
-            <ion-button color="primary">Save</ion-button>
+        <ion-col offset="6" >
+            <ion-button color="primary" (click)="presentModal()" ><ion-icon name="add"></ion-icon>&nbsp; Product</ion-button>
         </ion-col>
     </ion-row>
 </ion-grid>
+</ion-content>

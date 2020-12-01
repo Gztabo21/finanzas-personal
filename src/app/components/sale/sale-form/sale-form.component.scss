@@ -1,0 +1,14 @@
+
+  /* Works - pass "my-custom-class" in cssClass to increase specificity */
+ /*  .my-custom-class .modal-wrapper {
+    background: #222;
+  } */
+  .my-custom-class .modal-wrapper{
+    --max-width:100px;
+    --backdrop-opacity:0.5;
+    --background:#000;
+  }
+  .my-custom-class.sc-ion-modal-md-h{
+    --width: 85% !important;
+    --height: 48%;
+  }

@@ -1,15 +1,10 @@
-import { Product } from './product';
+import {SaleItem} from './item-sale'
 export class Sale {
 id?:number;
+state:string;
 number:number;
 client:Number;
 saleInvoice:Date;
 amountTotal:Number;
-saleItem:[{
-    id:Number;
-    product:Product;
-    cantidad:Number;
-    amount:Number;
-    amounTotal:number;
-}];
+saleItem: SaleItem[];
 }
