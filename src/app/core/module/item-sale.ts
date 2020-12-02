@@ -1,5 +1,5 @@
 import { Product } from './product';
-export class SaleItem {
+export interface SaleItem {
     id:Number;
     product:Product;
     quantity:Number;

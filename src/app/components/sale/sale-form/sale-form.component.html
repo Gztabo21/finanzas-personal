@@ -26,5 +26,23 @@
             <ion-button color="primary" (click)="presentModal()" ><ion-icon name="add"></ion-icon>&nbsp; Product</ion-button>
         </ion-col>
     </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item *ngFor="let saleItem of saleItems " >
+                <ion-label>{{getProduct(saleItem.product)}}</ion-label>
+                <ion-label>{{saleItem.quantity}}</ion-label>
+                <ion-label>{{saleItem.amountTotal}}</ion-label>
+                <ion-label>{{saleItem.unitPrice}}</ion-label>
+                <!-- <ion-button (click)="ActionSheet(k)" color="ligth"  style="color:#000;" >
+                    <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+                </ion-button> -->
+            </ion-item>
+        </ion-col>
+      </ion-row>
+    <ion-row>
+        <ion-col>
+        <ion-button color="primary" expand="full" [disabled]="" (click)="saveSale()" ><ion-icon name="save-outline"></ion-icon> &nbsp; Save</ion-button>
+        </ion-col>
+      </ion-row>
 </ion-grid>
 </ion-content>

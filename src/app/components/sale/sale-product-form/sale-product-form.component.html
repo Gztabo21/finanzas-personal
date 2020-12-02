@@ -5,30 +5,39 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-select formControlName="product"   placeholder="Select One Products">
-                <ion-select-option *ngFor="let k of products | keys" [value]="k" >{{products[k].name}}</ion-select-option>
+            <ion-select formControlName="product"  (ionChange)="getProduct($event)"  placeholder="Select One Products">
+                <ion-select-option  *ngFor="let k of products | keys" [value]="k" >{{products[k].name}}</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size="4"> <ion-button color="danger" ><ion-icon name="remove-outline"></ion-icon></ion-button></ion-col>
+        <ion-col size="4"> <ion-button color="danger" (click)="decrease()" ><ion-icon name="remove-outline"></ion-icon></ion-button></ion-col>
         <ion-col size="4"> 
           <ion-item>
-          <ion-input readonly="true" id="quantity" name="quantity" formControlName="quantity"  inputmode="numeric" ></ion-input>
+          <ion-input readonly="true" [ngModel]="quantity" formControlName="quantity"  inputmode="numeric" ></ion-input>
         </ion-item>
       </ion-col>
         <ion-col size="4"> <ion-button color="primary" (click)="increase()" ><ion-icon name="add"></ion-icon></ion-button></ion-col>
       </ion-row>
-      <ion-row><ion-col><label>Unit Price:</label></ion-col></ion-row>
-      <ion-row><ion-col><label>Amount Total:</label></ion-col></ion-row>
+      <ion-row>
+        <ion-col>
+        <label>Unit Price:</label>
+        <ion-input readonly="true" [ngModel]="unitPrice" formControlName="unitPrice" ></ion-input>
+      </ion-col>
+    
+        <ion-col>
+          <label>Amount Total:</label>
+          <ion-input readonly="true" [ngModel]="amountTotal" formControlName="amountTotal" ></ion-input>
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </form>
   <ion-grid>
-    <ion-grid>
+    <ion-row>
       <ion-col>
-      <ion-button color="primary" expand="full" ><ion-icon name="save-outline"></ion-icon> &nbsp; Save</ion-button>
+      <ion-button color="primary" expand="full" [disabled]="" (click)="saveProduct()" ><ion-icon name="save-outline"></ion-icon> &nbsp; Save</ion-button>
       </ion-col>
-    </ion-grid>
+    </ion-row>
   </ion-grid>
 </ion-content>
