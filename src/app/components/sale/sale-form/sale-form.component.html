@@ -1,7 +1,7 @@
 <app-header Name="New Sale" ></app-header>
 <ion-content>
 <ion-grid>
-    <form>
+    <form [formGroup]="saleForm">
         <ion-row>
             <ion-col>
               <!--   <ion-item *ngFor="let k of products | keys" >
@@ -11,7 +11,7 @@
                     </ion-button>
                 </ion-item> -->
                 <ion-item>
-                    <ion-select   placeholder="Select One Client">
+                    <ion-select formControlName="client"  placeholder="Select One Client">
                         <ion-select-option *ngFor="let k of clients | keys" [value]="k" >{{clients[k].name}}</ion-select-option>
                     </ion-select>
                 </ion-item>
@@ -23,25 +23,36 @@
     </form>
     <ion-row>
         <ion-col offset="6" >
-            <ion-button color="primary" (click)="presentModal()" ><ion-icon name="add"></ion-icon>&nbsp; Product</ion-button>
+            <ion-button color="primary" (click)="presentModal()" [disabled]="!saleForm.valid" ><ion-icon name="add"></ion-icon>&nbsp; Product</ion-button>
         </ion-col>
     </ion-row>
     <ion-row>
         <ion-col>
+            <ion-item >
+                <ion-label><strong>Name</strong></ion-label>
+                <ion-label><strong>Quantity</strong></ion-label>
+                <ion-label><strong>Unit Price</strong></ion-label>
+                <ion-label><strong>Total</strong></ion-label>
+            </ion-item>
             <ion-item *ngFor="let saleItem of saleItems " >
                 <ion-label>{{getProduct(saleItem.product)}}</ion-label>
                 <ion-label>{{saleItem.quantity}}</ion-label>
-                <ion-label>{{saleItem.amountTotal}}</ion-label>
                 <ion-label>{{saleItem.unitPrice}}</ion-label>
-                <!-- <ion-button (click)="ActionSheet(k)" color="ligth"  style="color:#000;" >
-                    <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-                </ion-button> -->
+                <ion-label>{{saleItem.amountTotal}}</ion-label>
+
             </ion-item>
+            <ion-item >
+                <ion-label>&nbsp;</ion-label>
+                <ion-label>&nbsp;</ion-label>
+                <ion-label>Total:</ion-label>
+                <ion-label>{{amountTotal}}</ion-label>
+            </ion-item>
+
         </ion-col>
       </ion-row>
-    <ion-row>
+    <ion-row *ngIf="saleItems.length > 0 ">
         <ion-col>
-        <ion-button color="primary" expand="full" [disabled]="" (click)="saveSale()" ><ion-icon name="save-outline"></ion-icon> &nbsp; Save</ion-button>
+        <ion-button color="primary" expand="full" (click)="saveSale()" ><ion-icon name="save-outline"></ion-icon> &nbsp; Save</ion-button>
         </ion-col>
       </ion-row>
 </ion-grid>

@@ -1,10 +1,10 @@
 import {SaleItem} from './item-sale'
-export class Sale {
+export interface Sale {
 id?:number;
 state:string;
 number:number;
 client:Number;
-saleInvoice:Date;
+saleInvoiceDate:Date;
 amountTotal:Number;
 saleItem: SaleItem[];
 }

@@ -44,7 +44,7 @@ export class SaleProductFormComponent implements OnInit {
       product:[this.saleItem?.product,Validators.required],
       quantity:[this.saleItem?.quantity||0],
       unitPrice:[this.saleItem?.unitPrice || 0],
-      amountTotal:[this.saleItem?.amounTotal || 0]
+      amountTotal:[this.saleItem?.amountTotal || 0]
     })
   }
   

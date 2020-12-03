@@ -4,5 +4,5 @@ export interface SaleItem {
     product:Product;
     quantity:Number;
     unitPrice:Number;
-    amounTotal:number;
+    amountTotal:number;
 }
