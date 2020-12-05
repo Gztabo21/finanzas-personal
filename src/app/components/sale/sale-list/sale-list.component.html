@@ -8,8 +8,38 @@
             </ion-col>
         </ion-row>
     </ion-grid>
-gdf
-   <app-table [elements]='sales' nameModule='sale'($key)="delete($event)" ></app-table>
+
+<!--     <app-table [elements]='sales' nameModule='sale'($key)="delete($event)" ></app-table>
+ -->
+ <ion-grid>
+     <ion-row>
+         <ion-col>
+            <ion-list>
+                <ion-item  >
+                    <ion-label><strong>Client</strong></ion-label>
+                    <ion-label><strong>Total</strong></ion-label>
+                    <ion-label><strong>Status</strong></ion-label>
+                </ion-item>
+            </ion-list>
+         </ion-col>
+     </ion-row>
+    <ion-row>
+        <ion-col>
+
+            <ion-list>
+                <ion-item *ngFor="let k of sales | keys" >
+                    <ion-label><ion-icon name="person-outline"></ion-icon> {{getNameClient(sales[k].client)}}</ion-label>
+                    <ion-label>{{sales[k].amountTotal}}</ion-label>
+                    <ion-chip class="chip" color="secondary">
+                    <ion-label>{{sales[k].state}}</ion-label>
+                    </ion-chip>
+                    <ion-button (click)="ActionSheet(k)" color="ligth"  style="color:#000;" ><ion-icon name="ellipsis-vertical-outline"></ion-icon></ion-button>
+                </ion-item>
+            </ion-list>
+        </ion-col>
+    </ion-row>
+ </ion-grid>
+   
 
 
 </ion-content>

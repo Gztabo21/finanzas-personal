@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Route,ActivatedRoute} from '@angular/router';
+import { Router,ActivatedRoute} from '@angular/router';
 import{ FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 //components
 import { SaleProductFormComponent } from '../sale-product-form/sale-product-form.component';
 // services
@@ -13,6 +15,7 @@ import { Sale } from 'src/app/core/module/sale';
 import { Product } from 'src/app/core/module/product'
 import { SaleItem } from 'src/app/core/module/item-sale'
 import { Client } from 'src/app/core/module/client'
+import {state} from 'src/app/core/enums/state';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -21,28 +24,53 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./sale-form.component.scss'],
 })
 export class SaleFormComponent implements OnInit {
+  /* variables */
   clients: Client[];
   saleItems: SaleItem[] = [];
   products: Product[]
   sale:Sale;
   saleForm:FormGroup;
-  amountTotal:number = 0;
+  amountTotal:Number = 0;
   today:Date = new Date;
-
+  id:string;
+  editing:boolean = false;
+  /* end variables */
   constructor(
     private _saleService:SaleService,
      public modalController:ModalController,
+     public alertController: AlertController,
      private _clientService:ClientService,
      private _productService:ProductService,
-     private _formbuilder:FormBuilder
-   /*  private route:Route,
-    private router:ActivatedRoute, */
-  ) { }
+     private _formbuilder:FormBuilder,
+     public toastController: ToastController,
+    private route:Router,
+    private activateRoute:ActivatedRoute
+  ) { 
+    this.activateRoute.params.subscribe(data=>this.id = data['id'])
+  }
 
   ngOnInit() {
     this.getClients();
     this.getProducts();
     this.saleForm = this.createForm();
+    this.beEditing();
+  }
+
+  beEditing(){
+    this.id ?
+    this._saleService.get(this.id).subscribe((data:Sale)=>{
+        this.sale = data;
+        this.saleForm = this.createForm(); 
+        this.sale.saleItem.forEach(r=>{
+          this.saleItems.push(r);
+        })
+        this.amountTotal = this.sale.amountTotal;
+        this.editing = true ;
+        console.log(this.sale);
+    })
+    :
+    console.log('no');
+
   }
 
   createForm():FormGroup{
@@ -69,6 +97,13 @@ export class SaleFormComponent implements OnInit {
     })
     return await modal.present();
   }
+  async notification(message:string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
 
   getClients(): void{
     this._clientService.getAll().subscribe((data:Client[])=>{
@@ -92,14 +127,48 @@ export class SaleFormComponent implements OnInit {
     })
   }
   saveSale(){
+    this.alertConfirmState()
+  }
+  save(state:string){
     let dataForm: Sale = this.saleForm.getRawValue();
-    dataForm.state = 'borrador';
+    dataForm.state = state ;
     dataForm.number = 1;
     dataForm.saleItem = this.saleItems;
-    dataForm.amountTotal = this.amountTotal;
-    console.log(dataForm); 
-    this._saleService.create(dataForm).subscribe(data=>console.log(data));
+    dataForm.amountTotal = this.amountTotal; 
+    !this.editing ?
+    this._saleService.create(dataForm).subscribe(data=>{
+      this.notification('Saved sale');
+        this.route.navigate(['../main/sale/list']);
+    }):
+    this._saleService.update(dataForm,this.id).subscribe(data=>{
+      this.notification('update sale');
+      this.route.navigate(['../main/sale/list']);
+    })
   }
    
+  async alertConfirmState() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm!',
+      message: 'Message <strong>Desea Validar la venta</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+           this.save(state.draft)
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.save(state.validated)
+          }
+        }
+      ]
+    });
 
+    await alert.present();
+  }
 }
+
