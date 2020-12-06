@@ -20,18 +20,24 @@
        
         </ion-row>
 
-    </form>
+    
     <ion-row *ngIf="editing">
         <ion-col >
-            <ion-chip class="chip" color="secondary">
+            <ion-item>
+                <ion-select formControlName="state"  placeholder="Change State">
+                    <ion-select-option *ngFor="let k of states  | keys"  >{{states[k]}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <!-- <ion-chip class="chip" color="secondary">
             {{sale?.state}}
-            </ion-chip>
+            </ion-chip> -->
             
         </ion-col>
-        <ion-col>
+        <!-- <ion-col>
             <ion-button color="primary">Change State</ion-button>
-        </ion-col>
+        </ion-col> -->
     </ion-row>
+</form>
     <ion-row>
         <ion-col offset="6" >
             <ion-button color="primary" (click)="presentModal()" [disabled]="!saleForm.valid" ><ion-icon name="add"></ion-icon>&nbsp; Product</ion-button>

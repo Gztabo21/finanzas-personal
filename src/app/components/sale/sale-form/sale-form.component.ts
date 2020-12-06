@@ -25,6 +25,7 @@ import { map } from 'rxjs/operators';
 })
 export class SaleFormComponent implements OnInit {
   /* variables */
+  states: any = state;
   clients: Client[];
   saleItems: SaleItem[] = [];
   products: Product[]
@@ -53,6 +54,7 @@ export class SaleFormComponent implements OnInit {
     this.getClients();
     this.getProducts();
     this.saleForm = this.createForm();
+    console.log(this.states)
     this.beEditing();
   }
 
@@ -112,8 +114,11 @@ export class SaleFormComponent implements OnInit {
   }
 
   getProduct(key):string {
-    let name = this.products[key].name;
-      return name;
+    let name 
+    this.products ?
+    name = this.products[key].name
+    : null
+    return name;
   }
   updateAmount(){
     let amounts = this.saleItems.map(r =>r.amountTotal)
