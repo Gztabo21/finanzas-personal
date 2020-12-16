@@ -1,6 +1,6 @@
 export class Payment{
     id?:number;
-    client:number;
+    sale:string;
     amount:number;
     paymentDate:Date;
 }
