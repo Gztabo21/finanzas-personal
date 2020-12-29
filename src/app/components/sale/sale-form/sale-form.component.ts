@@ -54,7 +54,6 @@ export class SaleFormComponent implements OnInit {
     this.getClients();
     this.getProducts();
     this.saleForm = this.createForm();
-    console.log(this.states)
     this.beEditing();
   }
 
@@ -62,16 +61,16 @@ export class SaleFormComponent implements OnInit {
     this.id ?
     this._saleService.get(this.id).subscribe((data:Sale)=>{
         this.sale = data;
+        console.log(data);
         this.saleForm = this.createForm(); 
         this.sale.saleItem.forEach(r=>{
           this.saleItems.push(r);
         })
         this.amountTotal = this.sale.amountTotal;
         this.editing = true ;
-        console.log(this.sale);
     })
     :
-    console.log('no');
+    null
 
   }
 
@@ -85,6 +84,7 @@ export class SaleFormComponent implements OnInit {
       saleItem:[this.sale?.saleItem || '']
     })
   }
+
   async presentModal() {
     const modal = await this.modalController.create({
       component: SaleProductFormComponent ,
@@ -123,7 +123,6 @@ export class SaleFormComponent implements OnInit {
   updateAmount(){
     let amounts = this.saleItems.map(r =>r.amountTotal)
     this.amountTotal = amounts.reduce((acc,val)=>eval(String(acc+'+'+val)))
-  
   }
   // all products
   getProducts():void{
@@ -131,6 +130,7 @@ export class SaleFormComponent implements OnInit {
       this.products = data;
     })
   }
+
   saveSale(){
     this.alertConfirmState()
   }
@@ -167,7 +167,7 @@ export class SaleFormComponent implements OnInit {
         }, {
           text: 'Okay',
           handler: () => {
-            this.save(state.validated)
+            this.save(state.pending)
           }
         }
       ]

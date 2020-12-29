@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { SafeGuard }from 'src/app/safe-.guard';
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
       },
       {
         path: 'sale',
-        loadChildren: () => import('../components/sale/sale.module').then(m => m.SaleModule)
+        loadChildren: () => import('../components/sale/sale.module').then(m => m.SaleModule),
+        canActivate:[SafeGuard]
       },
       {
         path: 'payment',
@@ -31,7 +33,8 @@ const routes: Routes = [
       },
       {
         path: 'order',
-        loadChildren: () => import('../components/order/order.module').then(m => m.OrderModule)
+        loadChildren: () => import('../components/order/order.module').then(m => m.OrderModule),
+
       }
     ]
   },
@@ -47,7 +50,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [    RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class TabsPageRoutingModule {}

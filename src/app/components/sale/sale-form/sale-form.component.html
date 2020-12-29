@@ -28,6 +28,7 @@
                     <ion-select-option *ngFor="let k of states  | keys"  >{{states[k]}}</ion-select-option>
                 </ion-select>
             </ion-item>
+
             <!-- <ion-chip class="chip" color="secondary">
             {{sale?.state}}
             </ion-chip> -->
@@ -37,6 +38,12 @@
             <ion-button color="primary">Change State</ion-button>
         </ion-col> -->
     </ion-row>
+    <ion-row *ngIf="sale?.state === 'PENDING' ">
+        <ion-col offset="1" >
+            <label class="msg-notification">Pendiente por entregar producto</label> 
+        </ion-col>
+    </ion-row>
+
 </form>
     <ion-row>
         <ion-col offset="6" >
