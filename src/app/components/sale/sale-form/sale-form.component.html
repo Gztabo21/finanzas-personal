@@ -24,7 +24,7 @@
     <ion-row *ngIf="editing">
         <ion-col >
             <ion-item>
-                <ion-select formControlName="state"  placeholder="Change State">
+                <ion-select disabled="true" formControlName="state"  placeholder="Change State">
                     <ion-select-option *ngFor="let k of states  | keys"  >{{states[k]}}</ion-select-option>
                 </ion-select>
             </ion-item>

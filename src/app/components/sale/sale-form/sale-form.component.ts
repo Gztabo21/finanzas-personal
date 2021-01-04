@@ -155,19 +155,19 @@ export class SaleFormComponent implements OnInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Confirm!',
-      message: 'Message <strong>Desea Validar la venta</strong>!!!',
+      message: '<strong>El pedido de venta se entregara de inmediato?</strong>',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'NOT',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-           this.save(state.draft)
+           this.save(state.pending)
           }
         }, {
-          text: 'Okay',
+          text: 'YES',
           handler: () => {
-            this.save(state.pending)
+            this.save(state.delivered)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
           }
         }
       ]
