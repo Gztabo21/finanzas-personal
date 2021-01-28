@@ -61,7 +61,6 @@ export class SaleFormComponent implements OnInit {
     this.id ?
     this._saleService.get(this.id).subscribe((data:Sale)=>{
         this.sale = data;
-        console.log(data);
         this.saleForm = this.createForm(); 
         this.sale.saleItem.forEach(r=>{
           this.saleItems.push(r);
@@ -94,11 +93,31 @@ export class SaleFormComponent implements OnInit {
 
     modal.onDidDismiss().then(data=>{
       let item = data.data;
+      if(item){
       this.saleItems.push(item);
       this.updateAmount();
+      }
     })
     return await modal.present();
   }
+
+  async deliveredProductModal() {
+    const modal = await this.modalController.create({
+      component: SaleProductFormComponent ,
+      cssClass: 'my-custom-class',
+      swipeToClose: true,
+    });
+
+    modal.onDidDismiss().then(data=>{
+      let item = data.data;
+      if(item){
+      this.saleItems.push(item);
+      this.updateAmount();
+      }
+    })
+    return await modal.present();
+  }
+
   async notification(message:string) {
     const toast = await this.toastController.create({
       message: message,
@@ -130,7 +149,9 @@ export class SaleFormComponent implements OnInit {
       this.products = data;
     })
   }
-
+  delete(id:number){
+    id == 0 ? this.saleItems.splice(id,id+1):this.saleItems.splice(id,id)
+  }
   saveSale(){
     this.alertConfirmState()
   }
@@ -149,6 +170,33 @@ export class SaleFormComponent implements OnInit {
       this.notification('update sale');
       this.route.navigate(['../main/sale/list']);
     })
+  }
+
+  async alertConfirmDelete(id) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm!',
+      message: '<strong>Desea eliminar el elemento?</strong>',
+      buttons: [
+        {
+          text: 'NOT',
+          role: 'cancel',
+          cssClass: 'secondary',
+         
+        }, {
+          text: 'YES',
+          handler: () => {
+            this.delete(id)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  delivered(){
+    console.log('fdsdfds')
   }
    
   async alertConfirmState() {

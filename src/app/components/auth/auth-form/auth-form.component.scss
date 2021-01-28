@@ -1,6 +1,15 @@
 .wrap-login-form{
-    background-color: black;
+    --background: rgb(165, 240, 121);
+}
+.item-input{
+    --background:rgb(165,240,121);
+}
+.avatar{
+    margin: auto 100%;
 }
 .message-error{
     color:red;
+}
+.app-auth-form{
+    
 }

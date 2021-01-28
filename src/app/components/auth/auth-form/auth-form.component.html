@@ -1,13 +1,13 @@
 
-<ion-content class="wrap-login-form">
+<ion-content  class="wrap-login-form">
 <ion-grid>
-  <ion-row><ion-col offset="4" ><ion-avatar>
-    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+  <ion-row><ion-col  ><ion-avatar >
+    <img class="avatar" src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
   </ion-avatar> </ion-col></ion-row>
   <form [formGroup]="signinForm" >
   <ion-row>
     <ion-col>
-      <ion-item>
+      <ion-item class="item-input">
         <ion-label position="floating">Correo</ion-label>
         <ion-input  formControlName="email" placeholder="Correo" type="text" ></ion-input>
       </ion-item>

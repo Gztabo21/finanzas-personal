@@ -19,6 +19,7 @@ export class SaleProductFormComponent implements OnInit {
   unitPrice:number = 0;
   products : Product[];
   saleItem : SaleItem;
+  totalStock:number;
   saleItemForm: FormGroup;
 
   constructor(
@@ -58,12 +59,13 @@ getProduct(e){
   let dataForm = this.saleItemForm.getRawValue();
   this.unitPrice = this.products[key].price;
   this.amountTotal = this.products[key].price;
+  this.totalStock = this.products[key].quantity
   this.quantity = 1;
   /* this.products[e.value] */
 }
 
 decrease(){
-  if(this.quantity !== 0){
+  if(this.quantity > 0){
     this.amountTotal = this.amountTotal - this.unitPrice ;
     this.quantity = this.quantity - 1;
   }else{

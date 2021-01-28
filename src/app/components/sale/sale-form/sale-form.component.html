@@ -40,7 +40,7 @@
     </ion-row>
     <ion-row *ngIf="sale?.state === 'PENDING' ">
         <ion-col offset="1" >
-            <label class="msg-notification">Pendiente por entregar producto</label> 
+            <label class="msg-notification"><a (click)="deliveredProductModal()">Pendiente por entregar producto</a></label> 
         </ion-col>
     </ion-row>
 
@@ -54,15 +54,17 @@
         <ion-col>
             <ion-item >
                 <ion-label><strong>Name</strong></ion-label>
-                <ion-label><strong>Quantity</strong></ion-label>
-                <ion-label><strong>Unit Price</strong></ion-label>
+                <ion-label><strong>Qty</strong></ion-label>
+                <ion-label><strong>UPrice</strong></ion-label>
                 <ion-label><strong>Total</strong></ion-label>
+                <ion-label></ion-label>
             </ion-item>
-            <ion-item *ngFor="let saleItem of saleItems " >
+            <ion-item *ngFor="let saleItem of saleItems;index as id;" >
                 <ion-label>{{getProduct(saleItem.product)}}</ion-label>
                 <ion-label>{{saleItem.quantity}}</ion-label>
                 <ion-label>{{saleItem.unitPrice}}</ion-label>
                 <ion-label>{{saleItem.amountTotal}}</ion-label>
+                <ion-label><ion-button color="light" (click)="alertConfirmDelete(id)" ><ion-icon name="trash-outline"></ion-icon></ion-button></ion-label>
 
             </ion-item>
             <ion-item >
