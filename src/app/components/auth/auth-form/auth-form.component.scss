@@ -1,4 +1,5 @@
 /* #1f495f */
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
 .wrap-login-form{
     --background: #2f5061;/*#1f465e  */
     --padding-top: 4rem;
@@ -32,6 +33,7 @@ footer{
     margin-top: 2rem;
     font-weight: bold;
     font-size: 1.5rem;
+    font-family: 'Dela Gothic One', cursive;
     color:#fff;
     margin:0.5rem auto;
     span{
