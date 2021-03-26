@@ -7,7 +7,8 @@ import { ProductRoutingModule } from './product-routing.module';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductListComponent } from './product-list/product-list.component';
 // services
-import { ProductService } from 'src/app/core/service/product.service'
+import { ProductService } from 'src/app/core/service/product.service';
+import { LayoutModule } from 'src/app/components/layout/layout.module';
 
 @NgModule({
   imports: [ 
@@ -15,7 +16,8 @@ import { ProductService } from 'src/app/core/service/product.service'
     FormsModule,
     ReactiveFormsModule,
     ProductRoutingModule,
-    SharedModule, 
+    SharedModule,
+    LayoutModule, 
     IonicModule],
   declarations: [
     ProductFormComponent,

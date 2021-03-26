@@ -1,6 +1,4 @@
 app-root{
-    ion-router-outlet{
-        --background: #2f5061;
+        --background:var(--ion-color-background);
         color:#fff;
-    }
   }
