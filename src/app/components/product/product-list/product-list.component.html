@@ -6,7 +6,7 @@
     </ion-toolbar>
 </ion-header> -->
 <app-header Name="Producto" ></app-header>
-<ion-content>
+<ion-content class="content-app">
 <ion-grid>
     <ion-row>
         <ion-col>
@@ -19,7 +19,7 @@
     </ion-row>
     <ion-row>
         <ion-col>
-            <ion-list>
+            <ion-list class="product-list">
                 <ion-item *ngFor="let k of products | keys" >
                     <ion-label>{{products[k].name}}</ion-label>
                     <ion-button (click)="ActionSheet(k)" color="ligth"  style="color:#000;" ><ion-icon name="ellipsis-vertical-outline"></ion-icon></ion-button>

@@ -1,0 +1,10 @@
+.content-app{
+    --background:var(--ion-color-background);
+}
+.product-list{
+    ion-item {
+        --background:var(--ion-color-background);
+        color: var(--ion-color-primary-contrast);
+    }
+    
+}
