@@ -24,6 +24,19 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+:root {
+  --ion-color-primary: #47d2c1;
+  --ion-color-primary-rgb: 71,210,193;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255,255,255;
+  --ion-color-primary-shade: #47d2c1;
+  --ion-color-primary-tint: #47d2c1;
+}
+*{
+  font-family: 'Roboto', sans-serif;
+}
 
 .sc-ion-modal-md-h{
     --width: 85% !important;

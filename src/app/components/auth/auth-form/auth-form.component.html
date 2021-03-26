@@ -1,20 +1,25 @@
 
 <ion-content  class="wrap-login-form">
 <ion-grid>
-  <ion-row><ion-col  ><ion-avatar >
-    <img class="avatar" src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-  </ion-avatar> </ion-col></ion-row>
-  <form [formGroup]="signinForm" >
+  <ion-row><ion-col size="auto" push="3" size-md="3"   >
+    <!-- 
+    <ion-avatar >
+      <img class="avatar" src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+    </ion-avatar> 
+    --> 
+  <label class="company-title" ><span>My</span>Company</label>
+</ion-col></ion-row>
+  <form class="form-sign" [formGroup]="signinForm" >
   <ion-row>
-    <ion-col>
+    <ion-col size-md="3" push-md="3">
       <ion-item class="item-input">
         <ion-label position="floating">Correo</ion-label>
-        <ion-input  formControlName="email" placeholder="Correo" type="text" ></ion-input>
+        <ion-input mode="ios" formControlName="email" placeholder="Correo" type="text" ></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col>
+    <ion-col size-md="3"  push-md="3" >
       <ion-item>
         <ion-label  position="floating">Contraseña</ion-label>
         <ion-input  formControlName="password" placeholder="Contraseña" type="password" ></ion-input>
@@ -27,13 +32,20 @@
 </ion-row>
 
   <ion-row>
-    <ion-col>
+    <ion-col size-md="3"  push-md="3" >
       <ion-button expand="block" (click)="signIn()" [disabled]="!signinForm.valid" >Iniciar Session</ion-button>
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col size="12">
+    <ion-col  size-md="3"  push-md="3">
       <ion-button expand="block" fill="outline" >Registrate </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12" >
+      <footer>
+        <h6>Creado por  <a href="mailto:Gustavocacharuco@gmail.com">Gustavo Cacharuco</a></h6>
+    </footer>
     </ion-col>
   </ion-row>
 </ion-grid>
