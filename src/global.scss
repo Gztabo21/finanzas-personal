@@ -44,3 +44,16 @@
     --height: 55vh;
     --border-radius: 13px;
   }
+ion-item,ion-content{
+    --background:var(--ion-color-background);
+    --color: var(--ion-color-primary-contrast);
+}
+.item-input{
+  --background: #284452;
+  --color:#fff;
+  border-radius: 6px;
+  /* border:solid 2px #47d2c1; */
+}
+.list-md{
+  background:var(--ion-color-background);
+}

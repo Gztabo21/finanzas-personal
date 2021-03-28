@@ -1,3 +1,4 @@
+<ion-content class="content-app">
 <ion-grid>
     <ion-row>
         <ion-col>
@@ -9,24 +10,30 @@
         <ion-row>
             <ion-col>
                 <ion-label>Name:</ion-label>
-                <ion-input formControlName="name" placeholder="Name"></ion-input>
+                <ion-input class="item-input" formControlName="name" placeholder="Name"></ion-input>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
                 <ion-label>precio unitario:</ion-label>
-                <ion-input formControlName="price" placeholder="precio"></ion-input>
+                <ion-input class="item-input" formControlName="price" placeholder="precio"></ion-input>
             </ion-col>
             <ion-col>
                 <ion-label>Cantidad:</ion-label>
-                <ion-input formControlName="quantity" placeholder="cantidad"></ion-input>
+                <ion-input class="item-input" formControlName="quantity" placeholder="cantidad"></ion-input>
             </ion-col>
         </ion-row>
 
     </form>
     <ion-row>
         <ion-col>
-            <ion-button expand="full" color="primary" [disabled]="!productForm.valid" (click)="save()">Save</ion-button>
+            <ion-button expand="block" color="primary" [disabled]="!productForm.valid" (click)="save()">Save</ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-button expand="block" [routerLink]="['/main/product/list']" color="primary">Volver</ion-button>
         </ion-col>
     </ion-row>
 </ion-grid>
+</ion-content>

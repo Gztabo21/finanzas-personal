@@ -11,7 +11,7 @@
                     </ion-button>
                 </ion-item> -->
                 <ion-item>
-                    <ion-select formControlName="client"  placeholder="Select One Client">
+                    <ion-select class="item-input" formControlName="client"  placeholder="Select One Client">
                         <ion-select-option *ngFor="let k of clients | keys" [value]="k" >{{clients[k].name}}</ion-select-option>
                     </ion-select>
                 </ion-item>
@@ -78,7 +78,7 @@
       </ion-row>
     <ion-row *ngIf="saleItems.length > 0 ">
         <ion-col>
-        <ion-button color="primary" expand="full" (click)="saveSale()" ><ion-icon name="save-outline"></ion-icon> &nbsp; Save</ion-button>
+        <ion-button color="primary" expand="block" (click)="saveSale()" ><ion-icon name="save-outline"></ion-icon> &nbsp; Save</ion-button>
         </ion-col>
       </ion-row>
 </ion-grid>
