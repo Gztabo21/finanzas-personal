@@ -6,6 +6,7 @@ import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 //components
 import { SaleProductFormComponent } from '../sale-product-form/sale-product-form.component';
+import { DeliverFormComponent } from 'src/app/components/deliver/deliver-form/deliver-form.component';
 // services
 import { SaleService } from 'src/app/core/service/sale.service';
 import { ClientService } from 'src/app/core/service/client.service';
@@ -103,9 +104,12 @@ export class SaleFormComponent implements OnInit {
 
   async deliveredProductModal() {
     const modal = await this.modalController.create({
-      component: SaleProductFormComponent ,
+      component: DeliverFormComponent ,
       cssClass: 'my-custom-class',
       swipeToClose: true,
+      componentProps:{
+        'client':this.sale?.id || 'other'
+      }
     });
 
     modal.onDidDismiss().then(data=>{
@@ -161,14 +165,10 @@ export class SaleFormComponent implements OnInit {
     dataForm.number = 1;
     dataForm.saleItem = this.saleItems;
     dataForm.amountTotal = this.amountTotal; 
-    !this.editing ?
-    this._saleService.create(dataForm).subscribe(data=>{
+    let request = !this.editing ? this._saleService.create(dataForm):this._saleService.update(dataForm,this.id)
+    request.subscribe(data=>{
       this.notification('Saved sale');
         this.route.navigate(['../main/sale/list']);
-    }):
-    this._saleService.update(dataForm,this.id).subscribe(data=>{
-      this.notification('update sale');
-      this.route.navigate(['../main/sale/list']);
     })
   }
 
@@ -185,6 +185,7 @@ export class SaleFormComponent implements OnInit {
          
         }, {
           text: 'YES',
+          cssClass:'primary',
           handler: () => {
             this.delete(id)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
           }
@@ -195,8 +196,33 @@ export class SaleFormComponent implements OnInit {
     await alert.present();
   }
 
-  delivered(){
+  deliveredToOther(){
     console.log('fdsdfds')
+  }
+  async confirmDelivered() {
+    const alert = await this.alertController.create({
+      cssClass: 'alert-deliver',
+      header: 'Confirm!',
+      message: '<strong>Aquien le entregara el producto?</strong>',
+      buttons: [
+        {
+          text: 'Otro',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            this.deliveredProductModal()
+          }
+        }, {
+          text: 'Cliente',
+          role:'confirm',
+          cssClass:'primary',
+          handler: () => {
+            this.deliveredProductModal()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+          }
+        }
+      ]
+    })
+    await alert.present();
   }
    
   async alertConfirmState() {
@@ -219,8 +245,7 @@ export class SaleFormComponent implements OnInit {
           }
         }
       ]
-    });
-
+    })
     await alert.present();
   }
 }

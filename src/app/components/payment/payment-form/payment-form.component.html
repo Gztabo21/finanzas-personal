@@ -1,3 +1,4 @@
+<ion-content>
 <ion-grid>
     <ion-row>
         <ion-col>
@@ -8,17 +9,20 @@
     <form [formGroup]="paymentForm">
         <ion-row>
             <ion-col>
-                <ion-label>Sale:</ion-label>
-                <ion-item>
+                <ion-item class="item-input">
+                    <ion-label>Sale:</ion-label>
                     <ion-select formControlName="sale"  placeholder="Select One Sale">
                         <ion-select-option *ngFor="let k of sales | keys" [value]="k" >{{sales[k].number}}</ion-select-option>
                     </ion-select>
                 </ion-item>
-
             </ion-col>
+        </ion-row>
+        <ion-row>
             <ion-col>
+                <ion-item  class="item-input">
                 <ion-label>Amount:</ion-label>
                 <ion-input formControlName="amount" placeholder="Amount"></ion-input>
+                </ion-item>    
             </ion-col>
         </ion-row>
     </form>
@@ -35,3 +39,4 @@
         </ion-col>
     </ion-row>
 </ion-grid>
+</ion-content>

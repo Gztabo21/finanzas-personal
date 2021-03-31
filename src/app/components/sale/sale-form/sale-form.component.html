@@ -46,7 +46,10 @@
 
 </form>
     <ion-row>
-        <ion-col offset="6" >
+        <ion-col size="6" >
+            <ion-button color="primary" [routerLink]="['/main/sale/list']" ><ion-icon name="arrow-undo-outline"></ion-icon>&nbsp; volver</ion-button>
+        </ion-col>
+        <ion-col size="6" >
             <ion-button color="primary" (click)="presentModal()" [disabled]="!saleForm.valid" ><ion-icon name="add"></ion-icon>&nbsp; Product</ion-button>
         </ion-col>
     </ion-row>
@@ -81,9 +84,9 @@
         <ion-button color="primary" expand="block" (click)="saveSale()" ><ion-icon name="save-outline"></ion-icon> &nbsp; Save</ion-button>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="sale?.state === 'PENDING'">
+      <ion-row > <!-- *ngIf="sale?.state === 'PENDING'" -->
         <ion-col>
-        <ion-button color="secondary" expand="block" (click)="saveSale()" > <span class="icon-deliver"></span> <img class="icon-custom" width="100px" src="../../../assets/delivering.svg" />&nbsp; deliver</ion-button>
+        <ion-button color="secondary" expand="block" (click)="confirmDelivered()" > <span class="icon-deliver"></span> <img class="icon-custom" width="100px" src="../../../assets/delivering.svg" />&nbsp; deliver</ion-button>
         </ion-col>
       </ion-row>
 </ion-grid>
