@@ -49,7 +49,8 @@ editing:boolean = false;
     return this.formBuilder.group({
       name:[this.client?.name,Validators.required],
       lastname:[this.client?.lastname,Validators.required],
-      phone:[this.client?.phone,Validators.required]
+      phone:[this.client?.phone,Validators.required],
+      address:[this.client?.address,Validators.required]
     })
   }
   save(){

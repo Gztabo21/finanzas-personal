@@ -29,13 +29,13 @@
 
     <ion-row>
         <ion-col>
-            <ion-button expand="full" [disabled]="!paymentForm.valid" (click)="save()">Guardar</ion-button>
+            <ion-button expand="full" [disabled]="!paymentForm.valid" (click)="save()"><ion-icon name="save"></ion-icon>&nbsp;Guardar</ion-button>
         </ion-col>
 
     </ion-row>
     <ion-row>
         <ion-col>
-            <ion-button expand="full" [routerLink]="['/main/payment/list']">Volver</ion-button>
+            <ion-button expand="full" [routerLink]="['/main/payment/list']"><ion-icon name="arrow-undo-outline"></ion-icon>&nbsp;Volver</ion-button>
         </ion-col>
     </ion-row>
 </ion-grid>

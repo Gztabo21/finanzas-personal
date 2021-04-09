@@ -7,6 +7,9 @@ import { SaleService } from 'src/app/core/service/sale.service';
 import {ClientService} from 'src/app/core/service/client.service';
 import { Client } from 'src/app/core/module/client';
 import { from } from 'rxjs';
+import { PaymentService } from 'src/app/core/service/payment.service';
+import { ToastController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-payment-form',
   templateUrl: './payment-form.component.html',
@@ -16,12 +19,19 @@ export class PaymentFormComponent implements OnInit {
 public paymentForm:FormGroup;
 payment:Payment;
 sales: Sale;
-today= new Date; 
+today= new Date;
+id:any ;
   constructor( 
+    private route:ActivatedRoute,
+    private router:Router,
     private formBuilder:FormBuilder,
     private _saleService: SaleService,
-    public _clientService: ClientService
-  ) { }
+    public _clientService: ClientService,
+    private _paymentService: PaymentService,
+    public toastController: ToastController,
+  ) {
+    this.route.params.subscribe(data=>{this.id = data['id']})
+   }
 
   ngOnInit() {
     this.paymentForm = this.createForm();
@@ -35,9 +45,17 @@ today= new Date;
       amountDate:[this.payment?.paymentDate || this.today]
     })
   }
+  async notification(message:string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
   save(){
     let data = this.paymentForm.getRawValue();
-    console.log(data);
+    let response$ =  this._paymentService.create(data)
+    response$.subscribe((data)=>{this.notification('operation success')})
   }
   getSale(){
     this._saleService.getAll().subscribe((data:Sale)=>{

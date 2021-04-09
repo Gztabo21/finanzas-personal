@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -35,7 +36,8 @@ const config = {
       AngularFireModule.initializeApp(config),
       AngularFireAuthModule,
       AngularFirestoreModule,
-      AngularFireStorageModule
+      AngularFireStorageModule,
+      CommonModule
     ],
 
 
