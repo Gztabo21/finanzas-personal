@@ -108,7 +108,8 @@ export class SaleFormComponent implements OnInit {
       cssClass: 'my-custom-class',
       swipeToClose: true,
       componentProps:{
-        'client':this.sale?.id || 'other'
+        'idClient': this.sale?.client || 'other',
+        'sale': this.sale?.id || 0
       }
     });
 
@@ -153,9 +154,11 @@ export class SaleFormComponent implements OnInit {
       this.products = data;
     })
   }
+
   delete(id:number){
     id == 0 ? this.saleItems.splice(id,id+1):this.saleItems.splice(id,id)
   }
+
   saveSale(){
     this.alertConfirmState()
   }
@@ -166,6 +169,7 @@ export class SaleFormComponent implements OnInit {
     dataForm.saleItem = this.saleItems;
     dataForm.amountTotal = this.amountTotal; 
     let request = !this.editing ? this._saleService.create(dataForm):this._saleService.update(dataForm,this.id)
+    
     request.subscribe(data=>{
       this.notification('Saved sale');
         this.route.navigate(['../main/sale/list']);
@@ -192,7 +196,6 @@ export class SaleFormComponent implements OnInit {
         }
       ]
     });
-
     await alert.present();
   }
 

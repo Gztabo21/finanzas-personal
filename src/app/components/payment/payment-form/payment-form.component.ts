@@ -60,15 +60,7 @@ id:any ;
   getSale(){
     this._saleService.getAll().subscribe((data:Sale)=>{
       this.sales = data;
-      console.log(this.sales);
     })
   }
-/*   getClients(){
 
-  } */
- /*  getNameClient(key:string):String{
-     this._clientService.get(key).subscribe((data:Client)=>{
-         data.name
-     })
-  } */
 }

@@ -6,39 +6,40 @@
       </ion-col>
     </ion-row>
     
-    <form  >
+    <form [formGroup]="deliverForm" >
+      <ion-row>
+        <ion-col>
+            <ion-input class="item-input" formControlName="name" placeholder="Name"></ion-input>
+        </ion-col>
+        <ion-col>
+            <ion-input class="item-input" formControlName="lastname" placeholder="apellido"></ion-input>
+        </ion-col>
+    </ion-row>
         <ion-row>
           <ion-col>
             <ion-item class="item-input">
-              <ion-input mode="ios" placeholder="Name" type="text" ></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-item class="item-input">
-              <ion-input  mode="ios" placeholder="Cedula" type="text" ></ion-input>
+              <ion-input  mode="ios" formControlName="cedula" placeholder="Cedula" type="text" ></ion-input>
             </ion-item>    
             </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
             <ion-item class="item-input">
-              <ion-input  mode="ios" placeholder="Telf:" type="text" ></ion-input>
+              <ion-input  mode="ios" formControlName="phone" placeholder="Telf:" type="text" ></ion-input>
             </ion-item>
             </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
             <ion-item class="item-input">
-              <ion-input  mode="ios" placeholder="Direccion" type="text" ></ion-input>
+              <ion-input  mode="ios" formControlName="address" placeholder="Direccion" type="text" ></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
     </form>
     <ion-row>
       <ion-col>
-        <ion-button expand="block">Confirm Deliver</ion-button>
+        <ion-button expand="block" [disabled]="deliverForm.valid" (click)="save()" >Confirm Deliver</ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
