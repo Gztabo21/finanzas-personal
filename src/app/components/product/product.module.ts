@@ -9,6 +9,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 // services
 import { ProductService } from 'src/app/core/service/product.service';
 import { LayoutModule } from 'src/app/components/layout/layout.module';
+import { PaymentService } from 'src/app/core/service/payment.service';
 
 @NgModule({
   imports: [ 
@@ -24,7 +25,8 @@ import { LayoutModule } from 'src/app/components/layout/layout.module';
     ProductListComponent],
   exports: [ProductListComponent],
   providers:[
-    ProductService
+    ProductService,
+    PaymentService
   ]
 })
 export class ProductModule {}

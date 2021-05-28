@@ -57,10 +57,12 @@ id:any ;
     let response$ =  this._paymentService.create(data)
     response$.subscribe((data)=>{this.notification('operation success')})
   }
+  onSelectChange(e){
+      this.sales = e.value;
+  }
   getSale(){
     this._saleService.getAll().subscribe((data:Sale)=>{
       this.sales = data;
-      console.log(this.sales);
     })
   }
 /*   getClients(){
