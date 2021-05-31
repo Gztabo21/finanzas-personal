@@ -10,7 +10,7 @@ import { Client } from '../module/client';
 })
 
 export class DeliverService {
-   apiUrl:string = environment.databaseURL + '/payments'
+   apiUrl:string = environment.databaseURL + '/clients'
    headers = new HttpHeaders( {
     'Content-Type':'application/json'
   })

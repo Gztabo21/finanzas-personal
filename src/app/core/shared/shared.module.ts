@@ -5,6 +5,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import {KeysPipe } from '../pipe/keys.pipe'
 import { IonicModule } from '@ionic/angular';
+import { MessageService } from 'src/app/core/service/message.service';
 
 @NgModule({
  imports:      [ CommonModule,
@@ -14,7 +15,11 @@ import { IonicModule } from '@ionic/angular';
  declarations: [ KeysPipe  ],
  exports:      [ HttpClientModule,
                 KeysPipe,
+                FormsModule,
                 ReactiveFormsModule,IonicModule
-                  ]
+                  ],
+providers:[
+  MessageService
+]
 })
 export class SharedModule { }
