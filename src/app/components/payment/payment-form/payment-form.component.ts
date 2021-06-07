@@ -65,12 +65,5 @@ id:any ;
       this.sales = data;
     })
   }
-/*   getClients(){
 
-  } */
- /*  getNameClient(key:string):String{
-     this._clientService.get(key).subscribe((data:Client)=>{
-         data.name
-     })
-  } */
 }

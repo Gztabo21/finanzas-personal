@@ -5,26 +5,27 @@
             <h1>New Client</h1>
         </ion-col>
     </ion-row>
-    <form [formGroup]="clientForm">
+    <form [formGroup]="clientForm" >
         <ion-row>
             <ion-col>
-                <!-- <ion-label>Name:</ion-label> -->
                 <ion-input class="item-input" formControlName="name" placeholder="Name"></ion-input>
             </ion-col>
             <ion-col>
-                <!-- <ion-label>Apellido:</ion-label> -->
                 <ion-input class="item-input" formControlName="lastname" placeholder="apellido"></ion-input>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
-                <!-- <ion-label>Telefono:</ion-label> -->
+                <ion-input class="item-input" formControlName="cedula" placeholder="Cedula"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
                 <ion-input class="item-input" formControlName="phone" placeholder="Telefono"></ion-input>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
-                <!-- <ion-label>Telefono:</ion-label> -->
                 <ion-input class="item-input" formControlName="address" placeholder="Dirección"></ion-input>
             </ion-col>
         </ion-row>

@@ -40,6 +40,5 @@ export class PaymentService {
        return r
      }))
 
-     // return this.angularFireDataBase.database.ref('products/').once('value')
   }
 }

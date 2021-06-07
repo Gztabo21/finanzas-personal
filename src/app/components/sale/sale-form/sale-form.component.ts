@@ -11,6 +11,7 @@ import { DeliverFormComponent } from 'src/app/components/deliver/deliver-form/de
 import { SaleService } from 'src/app/core/service/sale.service';
 import { ClientService } from 'src/app/core/service/client.service';
 import { ProductService } from 'src/app/core/service/product.service';
+import { MessageService } from 'src/app/core/service/message.service';
 // Module
 import { Sale } from 'src/app/core/module/sale';
 import { Product } from 'src/app/core/module/product'
@@ -45,8 +46,9 @@ export class SaleFormComponent implements OnInit {
      private _productService:ProductService,
      private _formbuilder:FormBuilder,
      public toastController: ToastController,
-    private route:Router,
-    private activateRoute:ActivatedRoute
+     public messageService: MessageService,
+    public route:Router,
+    public activateRoute:ActivatedRoute
   ) { 
     this.activateRoute.params.subscribe(data=>this.id = data['id'])
   }
@@ -56,6 +58,8 @@ export class SaleFormComponent implements OnInit {
     this.getProducts();
     this.saleForm = this.createForm();
     this.beEditing();
+   
+
   }
 
   beEditing(){
@@ -106,30 +110,31 @@ export class SaleFormComponent implements OnInit {
     const modal = await this.modalController.create({
       component: DeliverFormComponent ,
       cssClass: 'my-custom-class',
-      swipeToClose: true,
+      swipeToClose: false,
       componentProps:{
-        'client':this.sale?.id || 'other'
+        'idClient': 'other',
+        'sale': this.sale?.id || 0,
+        //'client': this.clients
       }
     });
 
     modal.onDidDismiss().then(data=>{
-      let item = data.data;
+      debugger
+      this._clientService.create(data.data).subscribe(x =>{
+        console.log(x)
+        debugger
+        this.messageService.notification('Operation Sucess',2000,"success")
+      })
+      /* let item = data.data;
       if(item){
       this.saleItems.push(item);
       this.updateAmount();
-      }
+      } */
     })
     return await modal.present();
   }
 
-  async notification(message:string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 2000
-    });
-    toast.present();
-  }
-
+  
   getClients(): void{
     this._clientService.getAll().subscribe((data:Client[])=>{
       this.clients = data;
@@ -153,9 +158,11 @@ export class SaleFormComponent implements OnInit {
       this.products = data;
     })
   }
+
   delete(id:number){
     id == 0 ? this.saleItems.splice(id,id+1):this.saleItems.splice(id,id)
   }
+
   saveSale(){
     this.alertConfirmState()
   }
@@ -166,34 +173,17 @@ export class SaleFormComponent implements OnInit {
     dataForm.saleItem = this.saleItems;
     dataForm.amountTotal = this.amountTotal; 
     let request = !this.editing ? this._saleService.create(dataForm):this._saleService.update(dataForm,this.id)
+    
     request.subscribe(data=>{
-      this.notification('Saved sale');
+      this.messageService.notification('Saved sale',2000);
         this.route.navigate(['../main/sale/list']);
     })
   }
 
   async alertConfirmDelete(id) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Confirm!',
-      message: '<strong>Desea eliminar el elemento?</strong>',
-      buttons: [
-        {
-          text: 'NOT',
-          role: 'cancel',
-          cssClass: 'secondary',
-         
-        }, {
-          text: 'YES',
-          cssClass:'primary',
-          handler: () => {
-            this.delete(id)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-          }
-        }
-      ]
-    });
-
-    await alert.present();
+    this.messageService.confirm().then(x=>{
+      x.role=='true'? this.delete(id):null
+    })
   }
 
   deliveredToOther(){
@@ -217,7 +207,7 @@ export class SaleFormComponent implements OnInit {
           role:'confirm',
           cssClass:'primary',
           handler: () => {
-            this.deliveredProductModal()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            this.save('delivered')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
           }
         }
       ]
