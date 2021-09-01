@@ -7,6 +7,7 @@ import { ToastController } from '@ionic/angular';
 //components
 import { SaleProductFormComponent } from '../sale-product-form/sale-product-form.component';
 import { DeliverFormComponent } from 'src/app/components/deliver/deliver-form/deliver-form.component';
+import { ClientFormComponent } from 'src/app/components/client/client-form/client-form.component'
 // services
 import { SaleService } from 'src/app/core/service/sale.service';
 import { ClientService } from 'src/app/core/service/client.service';
@@ -108,14 +109,14 @@ export class SaleFormComponent implements OnInit {
 
   async deliveredProductModal() {
     const modal = await this.modalController.create({
-      component: DeliverFormComponent ,
+      component: ClientFormComponent ,
       cssClass: 'my-custom-class',
       swipeToClose: false,
-      componentProps:{
+      /* componentProps:{
         'idClient': 'other',
         'sale': this.sale?.id || 0,
         //'client': this.clients
-      }
+      } */
     });
 
     modal.onDidDismiss().then(data=>{

@@ -52,6 +52,10 @@ id:any ;
     });
     toast.present();
   }
+
+  getData(e){
+    console.log(e.detail.value);
+  }
   save(){
     let data = this.paymentForm.getRawValue();
     let response$ =  this._paymentService.create(data)
@@ -60,6 +64,7 @@ id:any ;
   getSale(){
     this._saleService.getAll().subscribe((data:Sale)=>{
       this.sales = data;
+      console.log(data)
     })
   }
 

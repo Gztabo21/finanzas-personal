@@ -1,5 +1,10 @@
 <ion-content >
-  <ion-grid>
+<form [formGroup]="deliForm" >
+  <ion-input formControlName="name" class="item-input" name="name" (keyup)="test($event)" placeholder="Name"></ion-input>
+
+</form>
+<ion-button expand="block" [disabled]="!deliForm.invalid" (click)="save()" >Confirm Deliver</ion-button>
+ <!--  <ion-grid>
     <ion-row>
       <ion-col push="3">
           <h1>Delivered</h1>
@@ -9,37 +14,40 @@
     <form [formGroup]="deliverForm" >
       <ion-row>
         <ion-col>
-            <ion-input class="item-input" formControlName="name" placeholder="Name"></ion-input>
+            <ion-input formControlName="name" class="item-input" name="name"  placeholder="Name"></ion-input>
         </ion-col>
         <ion-col>
-            <ion-input class="item-input" formControlName="lastname" placeholder="apellido"></ion-input>
+            <ion-input class="item-input" formControlName="lastname" name="lastname" placeholder="Lastname"></ion-input>
         </ion-col>
     </ion-row>
         <ion-row>
           <ion-col>
             <ion-item class="item-input">
-              <ion-input  mode="ios" formControlName="cedula" placeholder="Cedula" type="text" ></ion-input>
-            </ion-item>    
+              <ion-input   formControlName="cedula" placeholder="Cedula" name="cedula" type="text" ></ion-input>
+            </ion-item>   
             </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
             <ion-item class="item-input">
-              <ion-input  mode="ios" formControlName="phone" placeholder="Telf:" type="text" ></ion-input>
+              <ion-input  formControlName="phone" placeholder="Telf:" type="text" ></ion-input>
             </ion-item>
             </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
             <ion-item class="item-input">
-              <ion-input  mode="ios" formControlName="address" placeholder="Direccion" type="text" ></ion-input>
+              <ion-input  formControlName="address" placeholder="Direccion" type="text" ></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
     </form>
+    <p>
+      Form Status: {{ deliverForm.invalid }}
+    </p>
     <ion-row>
       <ion-col>
-        <ion-button expand="block" [disabled]="deliverForm.valid" (click)="save()" >Confirm Deliver</ion-button>
+        <ion-button expand="block" [disabled]="!deliverForm.invalid" (click)="save()" >Confirm Deliver</ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -47,5 +55,5 @@
         <ion-button color="danger" expand="block">Cancel</ion-button>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 </ion-content>

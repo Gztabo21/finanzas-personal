@@ -13,6 +13,7 @@ import { ClientService } from 'src/app/core/service/client.service';
 import { ProductService } from 'src/app/core/service/product.service'
 //shared
 import { SharedModule } from 'src/app/core/shared/shared.module';
+import { DeliverFormComponent } from '../deliver/deliver-form/deliver-form.component';
 
 @NgModule({
   imports: [ 

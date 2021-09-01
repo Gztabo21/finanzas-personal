@@ -11,7 +11,7 @@
             <ion-col>
                 <ion-item class="item-input">
                     <ion-label>Sale:</ion-label>
-                    <ion-select formControlName="sale"  placeholder="Select One Sale">
+                    <ion-select formControlName="sale"  placeholder="Select One Sale" (ionChange)="getData($event)" >
                         <ion-select-option *ngFor="let k of sales | keys" [value]="k" >{{sales[k].number}}</ion-select-option>
                     </ion-select>
                 </ion-item>
