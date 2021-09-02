@@ -11,8 +11,8 @@
             <ion-col>
                 <ion-item class="item-input">
                     <ion-label>Sale:</ion-label>
-                    <ion-select formControlName="sale"  placeholder="Select One Sale" (ionChange)="getData($event)" >
-                        <ion-select-option *ngFor="let k of sales | keys" [value]="k" >{{sales[k].number}}</ion-select-option>
+                    <ion-select formControlName="sale"  placeholder="Select One Sale" (ionChange)="getSale($event)" >
+                        <ion-select-option *ngFor="let k of sales | keys" [value]="k" >{{sales[k].name}}</ion-select-option>
                     </ion-select>
                 </ion-item>
             </ion-col>
@@ -26,6 +26,11 @@
             </ion-col>
         </ion-row>
     </form>
+<ng-container *ngIf="sale?.name" >
+    <app-card [sale]="sale" [name]="'Gustavo'" [payments]="payments"></app-card>
+</ng-container>
+
+        
 
     <ion-row>
         <ion-col>

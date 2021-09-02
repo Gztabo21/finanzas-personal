@@ -10,6 +10,7 @@ import { from } from 'rxjs';
 import { PaymentService } from 'src/app/core/service/payment.service';
 import { ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
+import { filter, find, map } from 'rxjs/operators';
 @Component({
   selector: 'app-payment-form',
   templateUrl: './payment-form.component.html',
@@ -18,7 +19,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PaymentFormComponent implements OnInit {
 public paymentForm:FormGroup;
 payment:Payment;
+payments : Payment[];
 sales: Sale;
+sale:Sale;
 today= new Date;
 id:any ;
   constructor( 
@@ -35,7 +38,7 @@ id:any ;
 
   ngOnInit() {
     this.paymentForm = this.createForm();
-    this.getSale();
+    this.getSales();
   }
   createForm():FormGroup{
     return this.formBuilder.group({
@@ -53,19 +56,25 @@ id:any ;
     toast.present();
   }
 
-  getData(e){
-    console.log(e.detail.value);
+  getSale(e){
+    let key = e.target.value 
+    this._saleService.get(key).subscribe((sale:Sale)=>this.sale = sale)
+    this._paymentService.getAll().pipe(
+      map((data:Payment,i)=>[...Object.values(data)])
+    ).subscribe(data =>{
+      this.payments = data.filter(r=>r.sale === key)
+    })
   }
   save(){
     let data = this.paymentForm.getRawValue();
     let response$ =  this._paymentService.create(data)
     response$.subscribe((data)=>{this.notification('operation success')})
   }
-  getSale(){
+  getSales(){
     this._saleService.getAll().subscribe((data:Sale)=>{
       this.sales = data;
-      console.log(data)
     })
   }
+
 
 }

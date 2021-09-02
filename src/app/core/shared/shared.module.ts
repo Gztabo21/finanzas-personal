@@ -6,20 +6,28 @@ import { HttpClientModule} from '@angular/common/http';
 import {KeysPipe } from '../pipe/keys.pipe'
 import { IonicModule } from '@ionic/angular';
 import { MessageService } from 'src/app/core/service/message.service';
+import { ProductService }from 'src/app/core/service/product.service';
+// components
+import {CardComponent} from './card/card.component';
 
 @NgModule({
  imports:      [ CommonModule,
   ReactiveFormsModule,
   IonicModule,
 ],
- declarations: [ KeysPipe  ],
+ declarations: [ KeysPipe,
+  CardComponent
+ ],
  exports:      [ HttpClientModule,
                 KeysPipe,
                 FormsModule,
-                ReactiveFormsModule,IonicModule
+                ReactiveFormsModule,
+                IonicModule,
+                CardComponent
                   ],
 providers:[
-  MessageService
+  MessageService,
+  ProductService
 ]
 })
 export class SharedModule { }
