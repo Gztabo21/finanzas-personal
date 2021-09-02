@@ -2,7 +2,8 @@ import {SaleItem} from './item-sale'
 export interface Sale {
 id?:number;
 state:string;
-number:Number;
+number:number;
+name : string;
 client:string;
 saleInvoiceDate:Date;
 amountTotal:Number;

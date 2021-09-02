@@ -13,13 +13,17 @@ import { SaleService } from 'src/app/core/service/sale.service';
 import { ClientService } from 'src/app/core/service/client.service';
 import { ProductService } from 'src/app/core/service/product.service';
 import { MessageService } from 'src/app/core/service/message.service';
+import { SecuenceService } from 'src/app/core/service/secuence.service';
 // Module
 import { Sale } from 'src/app/core/module/sale';
 import { Product } from 'src/app/core/module/product'
 import { SaleItem } from 'src/app/core/module/item-sale'
 import { Client } from 'src/app/core/module/client'
 import {state} from 'src/app/core/enums/state';
+import { uid } from 'uid';
 import { map } from 'rxjs/operators';
+import { Secuence } from 'src/app/core/module/secuence';
+
 
 @Component({
   selector: 'app-sale-form',
@@ -30,6 +34,7 @@ export class SaleFormComponent implements OnInit {
   /* variables */
   states: any = state;
   clients: Client[];
+  client:Client;
   saleItems: SaleItem[] = [];
   products: Product[]
   sale:Sale;
@@ -38,6 +43,7 @@ export class SaleFormComponent implements OnInit {
   today:Date = new Date;
   id:string;
   editing:boolean = false;
+  secuence: Secuence;
   /* end variables */
   constructor(
     private _saleService:SaleService,
@@ -48,6 +54,7 @@ export class SaleFormComponent implements OnInit {
      private _formbuilder:FormBuilder,
      public toastController: ToastController,
      public messageService: MessageService,
+     public secuenceService: SecuenceService,
     public route:Router,
     public activateRoute:ActivatedRoute
   ) { 
@@ -59,8 +66,7 @@ export class SaleFormComponent implements OnInit {
     this.getProducts();
     this.saleForm = this.createForm();
     this.beEditing();
-   
-
+    this.getSecuence();
   }
 
   beEditing(){
@@ -78,11 +84,20 @@ export class SaleFormComponent implements OnInit {
     null
 
   }
+  
+  getSecuence(){
+    this.secuenceService.getSecuence('sale').subscribe(data =>this.secuence = data)
+  }
+  updateSecuence(){
+    this.secuence.nextNumber = parseInt(`${this.secuence.nextNumber}`)+1
+    this.secuenceService.update(this.secuence,'secuence').subscribe(data=>console.log('actualizado'))
+  }
 
   createForm():FormGroup{
     return this._formbuilder.group({
       state:[this.sale?.state || ''],
       number:[this.sale?.number],
+      name:[this.sale?.name||''],
       client:[this.sale?.client || '',Validators.required],
       saleInvoiceDate:[this.sale?.saleInvoiceDate || this.today ],
       amountTotal:[this.sale?.amountTotal || 0],
@@ -120,17 +135,9 @@ export class SaleFormComponent implements OnInit {
     });
 
     modal.onDidDismiss().then(data=>{
-      debugger
       this._clientService.create(data.data).subscribe(x =>{
-        console.log(x)
-        debugger
         this.messageService.notification('Operation Sucess',2000,"success")
       })
-      /* let item = data.data;
-      if(item){
-      this.saleItems.push(item);
-      this.updateAmount();
-      } */
     })
     return await modal.present();
   }
@@ -139,6 +146,12 @@ export class SaleFormComponent implements OnInit {
   getClients(): void{
     this._clientService.getAll().subscribe((data:Client[])=>{
       this.clients = data;
+    })
+  }
+  getClient(event:any){
+    let key = event.target.value;
+    this._clientService.get(key).subscribe((client:Client)=>{
+      this.client = client 
     })
   }
 
@@ -170,13 +183,15 @@ export class SaleFormComponent implements OnInit {
   save(state:string){
     let dataForm: Sale = this.saleForm.getRawValue();
     dataForm.state = state ;
-    dataForm.number = 1;
+    dataForm.number = this.secuence.nextNumber;
+    dataForm.name = dataForm.number+'-'+this.client.name;
     dataForm.saleItem = this.saleItems;
     dataForm.amountTotal = this.amountTotal; 
     let request = !this.editing ? this._saleService.create(dataForm):this._saleService.update(dataForm,this.id)
     
     request.subscribe(data=>{
       this.messageService.notification('Saved sale',2000);
+        !this.editing ? this.updateSecuence():null
         this.route.navigate(['../main/sale/list']);
     })
   }
@@ -224,8 +239,6 @@ export class SaleFormComponent implements OnInit {
       buttons: [
         {
           text: 'NOT',
-          role: 'cancel',
-          cssClass: 'secondary',
           handler: () => {
            this.save(state.pending)
           }

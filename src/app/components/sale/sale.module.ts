@@ -14,6 +14,7 @@ import { ProductService } from 'src/app/core/service/product.service'
 //shared
 import { SharedModule } from 'src/app/core/shared/shared.module';
 import { DeliverFormComponent } from '../deliver/deliver-form/deliver-form.component';
+import { SecuenceService } from 'src/app/core/service/secuence.service';
 
 @NgModule({
   imports: [ 
@@ -30,7 +31,8 @@ import { DeliverFormComponent } from '../deliver/deliver-form/deliver-form.compo
   providers:[
     SaleService,
     ClientService,
-    ProductService
+    ProductService,
+    SecuenceService
   ]
   // exports: [ProductListComponent]
 })
