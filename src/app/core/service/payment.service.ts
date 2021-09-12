@@ -32,7 +32,6 @@ export class PaymentService {
   get(id:string){
     let url = `${this.apiUrl}/${id}.json`
     return this.http.get(url)
-
   }
   getAll(){
      let url = `${this.apiUrl}.json`

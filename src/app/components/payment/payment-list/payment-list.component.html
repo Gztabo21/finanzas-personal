@@ -9,8 +9,12 @@
         </ion-row>
     </ion-grid>
     <ion-list>
-        <ion-item>
-            <ion-label>listas</ion-label>
-        </ion-item>
+        <ion-list >
+            <ion-item *ngFor="let k of payments | keys" >
+                <ion-label>{{payments[k].amount}}</ion-label>
+                <ion-label>{{getName(payments[k].sale)}}</ion-label>
+<!--                 <ion-button (click)="ActionSheet(k)" color="ligth"  style="color:#000;" ><ion-icon name="ellipsis-vertical-outline"></ion-icon></ion-button>
+ -->            </ion-item>
+        </ion-list>
     </ion-list>
 </ion-content>

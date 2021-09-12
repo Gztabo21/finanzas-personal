@@ -21,13 +21,13 @@
             <ion-col>
                 <ion-item  class="item-input">
                 <ion-label>Amount:</ion-label>
-                <ion-input formControlName="amount" placeholder="Amount"></ion-input>
+                <ion-input formControlName="amount" (keyup)="validationAmount($event)" placeholder="Amount"></ion-input>
                 </ion-item>    
             </ion-col>
         </ion-row>
     </form>
 <ng-container *ngIf="sale?.name" >
-    <app-card [sale]="sale" [name]="'Gustavo'" [payments]="payments"></app-card>
+    <app-card [sale]="sale" [name]="'Gustavo'" [payment]="total" [payments]="payments" ></app-card>
 </ng-container>
 
         

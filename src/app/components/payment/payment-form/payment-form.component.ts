@@ -20,6 +20,7 @@ export class PaymentFormComponent implements OnInit {
 public paymentForm:FormGroup;
 payment:Payment;
 payments : Payment[];
+total:number = 0;
 sales: Sale;
 sale:Sale;
 today= new Date;
@@ -55,7 +56,9 @@ id:any ;
     });
     toast.present();
   }
-
+  validationAmount(e){
+    this.total = e.target.value;
+  }
   getSale(e){
     let key = e.target.value 
     this._saleService.get(key).subscribe((sale:Sale)=>this.sale = sale)

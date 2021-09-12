@@ -17,6 +17,10 @@
     </table>
     <p><strong>Monto :</strong> <span>{{sale.amountTotal | currency }}</span></p>
     <p>Abonado <span>{{getAmountPayment()|currency}}</span></p>
+    <p>Total <span>{{getTotal(sale.amountTotal)|currency}}</span></p>
+    <p *ngIf="payment > getTotal(sale.amountTotal)">
+      <span>El pago es superior al monto de la venta.Verifique!!</span>
+    </p>
     
   </ion-card-content>
 </ion-card>
